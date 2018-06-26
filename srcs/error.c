@@ -10,12 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
+
+void		error_table(t_fourm *fourm)
+{
+	if (fourm)
+		clear_fourm(fourm);
+	exit(0);
+}
 
 void		error(t_fourm *fourm)
 {
 	if (fourm)
 		clear_fourm(fourm);
 	write(1, "ERROR\n", 6);
-	exit();
+	exit(0);
 }

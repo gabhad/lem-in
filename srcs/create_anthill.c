@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
 static void	clean_table(t_fourm *fourm, char **table, char *line)
 {
@@ -27,7 +27,30 @@ static void	clean_table(t_fourm *fourm, char **table, char *line)
 	error(fourm);
 }
 
-static void	initialize_start(t_fourm *fourm, char **param, char *line)
+static void	initialize_end(t_fourm *fourm, char *line)
+{
+	char	**table;
+	t_room	*end;
+
+	ft_strdel(&line);
+	if (!(get_next_line(0, &line)))
+		error(fourm);
+	table = ft_strsplit(line, ' ');
+	if (!check_table(table))
+	{
+		clean_table(fourm, table, line);
+		error_table(fourm);
+	}
+	if (!(end = (t_room*)malloc(sizeof(t_room))))
+		clean_table(fourm, table, line);
+	end->name = ft_strdup(table[0]);
+	end->x = ft_atoi(table[1]);
+	end->y = ft_atoi(table[2]);
+	end = fourm->end;
+	start->next = NULL;
+}
+
+static void	initialize_start(t_fourm *fourm, char *line)
 {
 	char	**table;
 	t_room	*start;
@@ -35,14 +58,22 @@ static void	initialize_start(t_fourm *fourm, char **param, char *line)
 	ft_strdel(&line);
 	if (!(get_next_line(0, &line)))
 		error(fourm);
-	table = ft_strsplit(line);
+	table = ft_strsplit(line, ' ');
 	if (!check_table(table))
-		clean_table(fourm, table, line)
+	{
+		clean_table(fourm, table, line);
+		error_table(fourm);
+	}
 	if (!(start = (t_room*)malloc(sizeof(t_room))))
-		clean_table(fourm, table, line)
+		clean_table(fourm, table, line);
+	start->name = ft_strdup(table[0]);
+	start->x = ft_atoi(table[1]);
+	start->y = ft_atoi(table[2]);
+	start = fourm->start;
+	start->next = NULL;
 }
 
-static void	gerer_diese(t_fourm *fourm, char **param, char *line)
+static void	gerer_diese(t_fourm *fourm, char *line)
 {
 	if (line[1] != '#')
 	{
@@ -52,9 +83,9 @@ static void	gerer_diese(t_fourm *fourm, char **param, char *line)
 	else
 	{
 		if (!ft_strcmp(line, "##start"))
-			initialize_start(fourm, param, line);
+			initialize_start(fourm, line);
 		else if (!ft_strcmp(line, "##end"))
-			initialize_end(fourm, param, line);
+			initialize_end(fourm, line);
 		else
 		{
 			ft_strdel(&line);
@@ -63,13 +94,30 @@ static void	gerer_diese(t_fourm *fourm, char **param, char *line)
 	}
 }
 
-int			create_anthill(t_fourm *fourm, char **param, char *line)
+int			create_anthill(t_fourm *fourm, char *line)
 {
-	if (!(get_next_line(0, line)))
-		error();
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	ft_strdel(&line);
+	if (!(get_next_line(0, &line)))
+		error(fourm);
 	if (line[0] == '#')
 	{
-		gerer_diese(fourm, param, line);
+		gerer_diese(fourm, line);
 		return (1);
 	}
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			j++
+	}
+	if (j == 2)
+	{
+		create_room(fourm, line);
+		return (1);
+	}
+	return (0);
 }

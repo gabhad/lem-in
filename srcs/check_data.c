@@ -10,26 +10,50 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
-int		check_table(char **table)
+static int	correct_table(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] == '0')
+		i++;
+	if (str[i] != '+' && (str[i] < '0' || str[i] > '9'))
+		return (0);
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int			check_table(char **table)
 {
 	int		i;
 
 	i = 0;
 	if (!table || !table[0] || !table[1] || !table[2] || table[3])
-		return (0);
-	/*while (tab[1][i] == '0')
-		i++;
-	if (tab[1][i] != '+' && (tab[1][i] < '0' || tab[1][i] > '9'))
-		return (NULL);
-	while (tab[i])
 	{
-		if (str[i] < '0' || str[i] > '9')
-			return (NULL);
-		i++;
+		write(1, "Parametres incorrects\n", 22);
+		return (0);
+	}
+	if (table[0][0] == 'L')
+	{
+		write(1, "Un nom de piece ne peut pas commencer par 'L'\n", 46);
+		return (0);
+	}
+	if (!correct_table(table[1]) || correct_table(table[2]))
+	{
+		write(1, "Merci de rentrer des coordonnees valides\n", 41);
+		return (0);
 	}
 	if (ft_atoi(table[1]) < 0 || ft_atoi(table[2]) < 0)
-		return (0);*/
-	// verifier que les donnes envoyees pour les room sont bonnes
+	{
+		write(1, "Merci de rentrer des coordonnees valides\n", 41);
+		return (0);
+	}
+	return (1);
 }

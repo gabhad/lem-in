@@ -10,14 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
 void	getdata(char **param)
 {
 	t_fourm		*fourm;
 
 	fourm = NULL;
+	(void)param;
 	if (!(fourm = (t_fourm*)malloc(sizeof(t_fourm))))
 		error(fourm);
-	fill_struct(fourm, param);
+	fill_struct(fourm);
 }

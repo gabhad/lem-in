@@ -13,7 +13,7 @@
 #ifndef LEMIN_H
 # define LEMIN_H
 
-# include "../includes/ft_printf.h"
+# include "../libft/includes/ft_printf.h"
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -24,6 +24,7 @@ typedef struct s_room
 	int				ant;
 	int				x;
 	int				y;
+	struct s_room	*next;
 }				t_room;
 
 typedef struct s_ant
@@ -34,17 +35,19 @@ typedef struct s_ant
 
 typedef struct s_fourm
 {
-	s_room			*start;
-	s_room			*end;
-	s_room			**room;
+	t_room			*start;
+	t_room			*end;
 	int				nb_fourmis;
 	int				nb_pieces;
 }				t_fourm;
 
 void	error(t_fourm *fourm);
+void	error_table(t_fourm *fourm);
 void	getdata(char **param);
-void	fill_struct(t_fourm *fourm, char **param);
-int		create_anthill(t_fourm *fourm, char **param, char *line);
+void	fill_struct(t_fourm *fourm);
+int		create_anthill(t_fourm *fourm, char *line);
+void	create_room(t_fourm *fourm, char *line);
 void	clear_fourm(t_fourm *fourm);
+int		check_table(char **table);
 
 #endif
