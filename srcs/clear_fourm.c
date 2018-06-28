@@ -12,6 +12,40 @@
 
 #include "../includes/lemin.h"
 
+static void	clear_ants(t_fourm *fourm)
+{
+	t_ant	*temp;
+	t_ant	*tempnext;
+
+	if (!fourm->first_ant)
+		return ;
+	temp = fourm->first_ant;
+	while (temp->next)
+	{
+		tempnext = temp->next;
+		free(temp);
+		temp = temp->next;
+	}
+	free(temp);
+}
+
+static void	clear_tubes(t_fourm *fourm)
+{
+	t_tube	*temp;
+	t_tube	*tempnext;
+
+	if (!fourm->first_tube)
+		return;
+	temp = fourm->first_tube;
+	while (!temp->next)
+	{
+		tempnext = temp->next;
+		free(temp);
+		temp = temp->next;
+	}
+	free(temp);
+}
+
 static void	clear_room(t_room *room)
 {
 	if (room->name)
@@ -23,17 +57,20 @@ static void	clear_room(t_room *room)
 
 void		clear_fourm(t_fourm *fourm)
 {
-	int i;
+	t_room	*temp;
+	t_room	*temp_next;
 
-	i = 0;
+	temp_next = NULL;
 	if (fourm->start)
-		clear_room(fourm->start);
-	if (fourm->end)
-		clear_room(fourm->end);
-	while (fourm->room[i])
+		temp = fourm->start;
+	while(temp->next)
 	{
-		clear_room(fourm->room[i]);
-		i++;
+		tempnext = temp->next;
+		clear_room(temp);
+		temp = temp->next;
 	}
+	clear_room(temp);
+	clear_tubes(fourm);
+	clear_ants(fourm);
 	free(fourm);
 }

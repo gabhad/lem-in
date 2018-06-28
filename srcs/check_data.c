@@ -45,7 +45,7 @@ int			check_table(char **table)
 		write(1, "Un nom de piece ne peut pas commencer par 'L'\n", 46);
 		return (0);
 	}
-	if (!correct_table(table[1]) || correct_table(table[2]))
+	if (!correct_table(table[1]) || !correct_table(table[2]))
 	{
 		write(1, "Merci de rentrer des coordonnees valides\n", 41);
 		return (0);

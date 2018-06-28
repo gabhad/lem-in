@@ -38,6 +38,8 @@ void		fill_struct(t_fourm *fourm)
 	temp = fourm->start;
 	while (temp->next)
 		temp = temp->next;
-	temp->next = end;
+	temp->next = fourm->end;
 	fourm->nb_pieces = i;
+	get_tubes(fourm, line);
+	generate_ants(fourm);
 }

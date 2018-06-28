@@ -25,18 +25,29 @@ typedef struct s_room
 	int				x;
 	int				y;
 	struct s_room	*next;
+	struct s_room	*prev;
 }				t_room;
 
 typedef struct s_ant
 {
-	char			*name;
-	t_room			room;	
+	int				id;
+	t_room			*room;
+	struct s_ant	*next;
 }				t_ant;
+
+typedef struct s_tube
+{
+	t_room			*room1;
+	t_room			*room2;
+	struct s_tube	*next_tube;
+}				t_tube;
 
 typedef struct s_fourm
 {
 	t_room			*start;
 	t_room			*end;
+	t_tube			*first_tube;
+	t_ant			*first_ant;
 	int				nb_fourmis;
 	int				nb_pieces;
 }				t_fourm;
@@ -49,5 +60,8 @@ int		create_anthill(t_fourm *fourm, char *line);
 void	create_room(t_fourm *fourm, char *line);
 void	clear_fourm(t_fourm *fourm);
 int		check_table(char **table);
+void	del_table(char **tab);
+void	get_tubes(t_fourm *fourm, char *line);
+void	generate_ants(t_fourm *fourm);
 
 #endif

@@ -46,8 +46,9 @@ static void	initialize_end(t_fourm *fourm, char *line)
 	end->name = ft_strdup(table[0]);
 	end->x = ft_atoi(table[1]);
 	end->y = ft_atoi(table[2]);
-	end = fourm->end;
-	start->next = NULL;
+	fourm->end = end;
+	end->next = NULL;
+	del_table(table);
 }
 
 static void	initialize_start(t_fourm *fourm, char *line)
@@ -69,8 +70,10 @@ static void	initialize_start(t_fourm *fourm, char *line)
 	start->name = ft_strdup(table[0]);
 	start->x = ft_atoi(table[1]);
 	start->y = ft_atoi(table[2]);
-	start = fourm->start;
+	fourm->start = start;
 	start->next = NULL;
+	start->prev = NULL;
+	del_table(table);
 }
 
 static void	gerer_diese(t_fourm *fourm, char *line)
@@ -112,7 +115,7 @@ int			create_anthill(t_fourm *fourm, char *line)
 	while (line[i])
 	{
 		if (line[i] == ' ')
-			j++
+			j++;
 	}
 	if (j == 2)
 	{
