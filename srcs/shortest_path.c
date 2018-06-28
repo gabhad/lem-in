@@ -1,27 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   shortest_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghaddad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/25 13:17:57 by ghaddad           #+#    #+#             */
-/*   Updated: 2018/06/25 13:18:00 by ghaddad          ###   ########.fr       */
+/*   Created: 2018/06/28 11:32:28 by ghaddad           #+#    #+#             */
+/*   Updated: 2018/06/28 11:32:30 by ghaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
 
-int	main(int argc, char **argv)
-{
-	t_fourm	*fourm;
-
-	if (argc == 1)
-	{
-		write(1, "ERROR\n", 6);
-		return (0);
-	}
-	getdata(fourm);
-	lemin_sover(fourm);
-	return (0);
-}
