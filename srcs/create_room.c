@@ -29,6 +29,7 @@ void	create_room(t_fourm *fourm, char *line)
 	room->name = ft_strdup(table[0]);
 	room->x = ft_atoi(table[1]);
 	room->y = ft_atoi(table[2]);
+	room->distance = -1;
 	temp = fourm->start;
 	while (temp->next)
 		temp = temp->next;

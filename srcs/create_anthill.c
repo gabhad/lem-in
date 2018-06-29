@@ -48,6 +48,7 @@ static void	initialize_end(t_fourm *fourm, char *line)
 	end->y = ft_atoi(table[2]);
 	fourm->end = end;
 	end->next = NULL;
+	end->distance = -1;
 	del_table(table);
 }
 
@@ -73,6 +74,7 @@ static void	initialize_start(t_fourm *fourm, char *line)
 	fourm->start = start;
 	start->next = NULL;
 	start->prev = NULL;
+	start->distance = 0;
 	del_table(table);
 }
 

@@ -24,6 +24,7 @@ typedef struct s_room
 	int				ant;
 	int				x;
 	int				y;
+	int				distance;
 	struct s_room	*next;
 	struct s_room	*prev;
 }				t_room;
@@ -48,6 +49,7 @@ typedef struct s_fourm
 	t_room			*end;
 	t_tube			*first_tube;
 	t_ant			*first_ant;
+	t_list			*shortest_path;
 	int				nb_fourmis;
 	int				nb_pieces;
 }				t_fourm;
