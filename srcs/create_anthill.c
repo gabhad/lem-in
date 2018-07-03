@@ -12,7 +12,7 @@
 
 #include "../includes/lemin.h"
 
-static void	clean_table(t_fourm *fourm, char **table, char *line)
+void		clean_table(t_fourm *fourm, char **table, char *line)
 {
 	int		i;
 

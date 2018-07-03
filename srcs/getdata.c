@@ -14,8 +14,6 @@
 
 void	getdata(t_fourm	*fourm)
 {
-	t_fourm		*fourm;
-
 	if (!(fourm = (t_fourm*)malloc(sizeof(t_fourm))))
 		error(fourm);
 	fill_struct(fourm);

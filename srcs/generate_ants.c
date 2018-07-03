@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
-static t_ant	create_ant(t_fourm *fourm, int id)
+static t_ant	*create_ant(t_fourm *fourm, int id)
 {
 	t_ant	*ant;
 

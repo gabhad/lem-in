@@ -16,12 +16,14 @@ int	main(int argc, char **argv)
 {
 	t_fourm	*fourm;
 
+	fourm = NULL;
+	(void)argv;
 	if (argc == 1)
 	{
 		write(1, "ERROR\n", 6);
 		return (0);
 	}
 	getdata(fourm);
-	lemin_sover(fourm);
+	lemin_solver(fourm);
 	return (0);
 }

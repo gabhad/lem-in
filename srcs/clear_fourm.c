@@ -37,11 +37,11 @@ static void	clear_tubes(t_fourm *fourm)
 	if (!fourm->first_tube)
 		return;
 	temp = fourm->first_tube;
-	while (!temp->next)
+	while (!temp->next_tube)
 	{
-		tempnext = temp->next;
+		tempnext = temp->next_tube;
 		free(temp);
-		temp = temp->next;
+		temp = temp->next_tube;
 	}
 	free(temp);
 }
@@ -62,14 +62,16 @@ void		clear_fourm(t_fourm *fourm)
 
 	temp_next = NULL;
 	if (fourm->start)
-		temp = fourm->start;
-	while(temp->next)
 	{
-		tempnext = temp->next;
+		temp = fourm->start;
+		while(temp->next)
+		{
+			temp_next = temp->next;
+			clear_room(temp);
+			temp = temp_next;
+		}
 		clear_room(temp);
-		temp = temp->next;
 	}
-	clear_room(temp);
 	clear_tubes(fourm);
 	clear_ants(fourm);
 	free(fourm);
