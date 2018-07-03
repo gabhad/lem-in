@@ -66,5 +66,7 @@ void	del_table(char **tab);
 void	get_tubes(t_fourm *fourm, char *line);
 void	generate_ants(t_fourm *fourm);
 void	lemin_solver(t_fourm *fourm);
+void	shortest_path(t_fourm *fourm);
+void	clean_table(t_fourm *fourm, char **table, char *line);
 
 #endif
