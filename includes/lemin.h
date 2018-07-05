@@ -49,7 +49,7 @@ typedef struct s_fourm
 	t_room			*end;
 	t_tube			*first_tube;
 	t_ant			*first_ant;
-	t_list			*shortest_path;
+	t_room			*shortest_path;
 	int				nb_fourmis;
 	int				nb_pieces;
 }				t_fourm;
@@ -68,5 +68,6 @@ void	generate_ants(t_fourm *fourm);
 void	lemin_solver(t_fourm *fourm);
 void	shortest_path(t_fourm *fourm);
 void	clean_table(t_fourm *fourm, char **table, char *line);
+void	set_path(t_fourm *fourm);
 
 #endif
