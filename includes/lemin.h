@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef struct s_room
+typedef struct	s_room
 {
 	char			*name;
 	char			*links;
@@ -29,45 +29,46 @@ typedef struct s_room
 	struct s_room	*prev;
 }				t_room;
 
-typedef struct s_ant
+typedef struct	s_ant
 {
 	int				id;
 	t_room			*room;
 	struct s_ant	*next;
 }				t_ant;
 
-typedef struct s_tube
+typedef struct	s_tube
 {
 	t_room			*room1;
 	t_room			*room2;
 	struct s_tube	*next_tube;
 }				t_tube;
 
-typedef struct s_fourm
+typedef struct	s_fourm
 {
 	t_room			*start;
 	t_room			*end;
 	t_tube			*first_tube;
 	t_ant			*first_ant;
-	t_room			*shortest_path;
+	t_list			*shortest_path;
 	int				nb_fourmis;
 	int				nb_pieces;
 }				t_fourm;
 
-void	error(t_fourm *fourm);
-void	error_table(t_fourm *fourm);
-void	getdata(t_fourm *fourm);
-void	fill_struct(t_fourm *fourm);
-int		create_anthill(t_fourm *fourm, char *line);
-void	create_room(t_fourm *fourm, char *line);
-void	clear_fourm(t_fourm *fourm);
-int		check_table(char **table);
-void	del_table(char **tab);
-void	get_tubes(t_fourm *fourm, char *line);
-void	generate_ants(t_fourm *fourm);
-void	lemin_solver(t_fourm *fourm);
-void	shortest_path(t_fourm *fourm);
-void	clean_table(t_fourm *fourm, char **table, char *line);
-void	set_path(t_fourm *fourm);
+void			error(t_fourm *fourm);
+void			error_table(t_fourm *fourm);
+void			getdata(t_fourm *fourm);
+void			fill_struct(t_fourm *fourm);
+int				create_anthill(t_fourm *fourm, char *line);
+void			create_room(t_fourm *fourm, char *line);
+void			clear_fourm(t_fourm *fourm);
+int				check_table(char **table);
+void			del_table(char **tab);
+void			get_tubes(t_fourm *fourm, char *line);
+void			generate_ants(t_fourm *fourm);
+void			lemin_solver(t_fourm *fourm);
+void			shortest_path(t_fourm *fourm);
+void			clean_table(t_fourm *fourm, char **table, char *line);
+void			set_path(t_fourm *fourm);
+void			direct_ants(t_fourm *fourm);
 
 #endif

@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
- 
-static void	reverse_path(t_fourm *fourm)
+
+/*static void	reverse_path(t_fourm *fourm)
 {
 	t_room	*newlist;
 	t_room	*next;
@@ -26,27 +26,27 @@ static void	reverse_path(t_fourm *fourm)
 		fourm->shortest_path = next;
 	}
 	fourm->shortest_path = newlist;
-}
+}*/
 
 void		set_path(t_fourm *fourm)
 {
-	t_room	*path;
+	t_list	*path;
 	t_tube	*tube;
 
-	fourm->shortest_path = fourm->end;
+	fourm->shortest_path->content = fourm->end;
 	path = fourm->shortest_path;
 	tube = fourm->first_tube;
 	while (path != fourm->start)
 	{
 		while (path != tube->room1 && path != tube->room2)
 			tube = tube->next_tube;
-		if (path == tube->room1 
+		if (path == tube->room1
 			&& path->distance == tube->room2->distance + 1)
-			path->next = tube->room2;
-		else if ((path == tube->room2 
+			path->next->content = tube->room2;
+		else if ((path == tube->room2
 			&& path->distance == tube->room1->distance + 1))
-			path->next = tube->room1;
+			path->next->content = tube->room1;
 		path = path->next;
 	}
-	reverse_path(fourm);
+//	reverse_path(fourm);
 }

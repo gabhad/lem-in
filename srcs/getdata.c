@@ -12,7 +12,7 @@
 
 #include "../includes/lemin.h"
 
-void	getdata(t_fourm	*fourm)
+void	getdata(t_fourm *fourm)
 {
 	if (!(fourm = (t_fourm*)malloc(sizeof(t_fourm))))
 		error(fourm);

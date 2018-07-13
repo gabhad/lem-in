@@ -22,7 +22,7 @@ static void		gerer_diese(t_fourm *fourm, char *line)
 	}
 }
 
-static void		second_room(t_fourm *fourm, t_tube *tube, t_room *room, char *line)
+static void		new_room(t_fourm *fourm, t_tube *tube, t_room *room, char *line)
 {
 	t_room	*temp;
 
@@ -48,7 +48,7 @@ static t_tube	*check_liaison(t_fourm *fourm, char *line)
 		{
 			tube->room1 = temp;
 			temp = temp->next;
-			second_room(fourm, tube, temp, line);
+			new_room(fourm, tube, temp, line);
 		}
 	}
 	return (tube);

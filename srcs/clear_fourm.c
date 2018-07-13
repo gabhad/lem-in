@@ -35,7 +35,7 @@ static void	clear_tubes(t_fourm *fourm)
 	t_tube	*tempnext;
 
 	if (!fourm->first_tube)
-		return;
+		return ;
 	temp = fourm->first_tube;
 	while (!temp->next_tube)
 	{
@@ -64,7 +64,7 @@ void		clear_fourm(t_fourm *fourm)
 	if (fourm->start)
 	{
 		temp = fourm->start;
-		while(temp->next)
+		while (temp->next)
 		{
 			temp_next = temp->next;
 			clear_room(temp);
