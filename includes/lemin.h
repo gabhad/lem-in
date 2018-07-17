@@ -43,13 +43,19 @@ typedef struct	s_tube
 	struct s_tube	*next_tube;
 }				t_tube;
 
+typedef struct	s_path
+{
+	t_room			*room;
+	struct s_path	*next;
+}				t_path;
+
 typedef struct	s_fourm
 {
 	t_room			*start;
 	t_room			*end;
 	t_tube			*first_tube;
 	t_ant			*first_ant;
-	t_list			*shortest_path;
+	t_path			*shortest_path;
 	int				nb_fourmis;
 	int				nb_pieces;
 }				t_fourm;

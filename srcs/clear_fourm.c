@@ -12,6 +12,23 @@
 
 #include "../includes/lemin.h"
 
+static void	clear_path(t_fourm *fourm)
+{
+	t_path	*temp;
+	t_path	*tempnext;
+
+	if (!fourm->shortest_path)
+		return ;
+	temp = fourm->shortest_path;
+	while (temp->next)
+	{
+		tempnext = temp->next;
+		free(temp);
+		temp = temp->next;
+	}
+	free(temp);
+}
+
 static void	clear_ants(t_fourm *fourm)
 {
 	t_ant	*temp;
@@ -74,5 +91,6 @@ void		clear_fourm(t_fourm *fourm)
 	}
 	clear_tubes(fourm);
 	clear_ants(fourm);
+	clear_path(fourm);
 	free(fourm);
 }

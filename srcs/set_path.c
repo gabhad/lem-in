@@ -12,41 +12,50 @@
 
 #include "../includes/lemin.h"
 
-/*static void	reverse_path(t_fourm *fourm)
+static int		path_loop(t_path *path, t_tube *tube)
 {
-	t_room	*newlist;
-	t_room	*next;
-
-	newlist = NULL;
-	while (fourm->shortest_path)
+	while (path->room != tube->room1
+			&& path->room != tube->room2)
+			tube = tube->next_tube;
+	if (path->room == tube->room1
+		&& path->room->distance == tube->room2->distance + 1)
 	{
-		next = fourm->shortest_path->next;
-		fourm->shortest_path->next = newlist;
-		newlist = fourm->shortest_path;
-		fourm->shortest_path = next;
+		path->next->room = tube->room2;
+		return (1);
 	}
-	fourm->shortest_path = newlist;
-}*/
+	else if (path->room == tube->room2
+		&& path->room->distance == tube->room1->distance + 1)
+	{
+		path->next->room = tube->room1;
+		return (1);
+	}
+	return (0);	
+}
 
-void		set_path(t_fourm *fourm)
+static t_path	*create_path(t_fourm *fourm)
 {
-	t_list	*path;
+	t_path	*path;
+
+	if (!(path = (t_path *)malloc(sizeof(t_path))))
+		error(fourm);
+	return (path);
+}
+
+void			set_path(t_fourm *fourm)
+{
+	t_path	*path;
 	t_tube	*tube;
 
-	fourm->shortest_path->content = fourm->end;
+	path = create_path(fourm);
 	path = fourm->shortest_path;
+	path->room = fourm->end;
 	tube = fourm->first_tube;
-	while (path != fourm->start)
+	while (path->room != fourm->start)
 	{
-		while (path != tube->room1 && path != tube->room2)
+		while (!path_loop(path, tube))
 			tube = tube->next_tube;
-		if (path == tube->room1
-			&& path->distance == tube->room2->distance + 1)
-			path->next->content = tube->room2;
-		else if ((path == tube->room2
-			&& path->distance == tube->room1->distance + 1))
-			path->next->content = tube->room1;
+		path->next = create_path(fourm);
 		path = path->next;
+		tube = fourm->first_tube;
 	}
-//	reverse_path(fourm);
 }
