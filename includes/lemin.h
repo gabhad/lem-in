@@ -53,6 +53,7 @@ typedef struct	s_fourm
 {
 	t_room			*start;
 	t_room			*end;
+	t_room			*room_list;
 	t_tube			*first_tube;
 	t_ant			*first_ant;
 	t_path			*shortest_path;

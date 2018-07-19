@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
+#include "lemin.h"
 
 static int		path_loop(t_path *path, t_tube *tube)
 {
 	while (path->room != tube->room1
 			&& path->room != tube->room2)
-			tube = tube->next_tube;
+		tube = tube->next_tube;
 	if (path->room == tube->room1
 		&& path->room->distance == tube->room2->distance + 1)
 	{
@@ -29,7 +29,7 @@ static int		path_loop(t_path *path, t_tube *tube)
 		path->next->room = tube->room1;
 		return (1);
 	}
-	return (0);	
+	return (0);
 }
 
 static t_path	*create_path(t_fourm *fourm)

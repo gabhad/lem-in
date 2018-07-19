@@ -117,18 +117,15 @@ $(OBJ_PATH):
 $(NAME): $(OBJ_PATH) $(OBJ)
 				@ar rc $(NAME) $(OBJ_PATH)*.o
 				@ranlib $(NAME)
-				@echo "~~~Libft successfully created !~~~"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 				@$(CC) $(CFLAGS) $< -o $@ $(PRINTF_H) $(LIBFT_H)
 
 clean:
 				@rm -rf $(OBJ_PATH)
-				@echo "~~~Clean successful !~~~"
 
 fclean:
 				@rm -rf $(OBJ_PATH) $(NAME)
-				@echo "~~~Fclean sucessful !~~~"
 
 re: fclean all
 

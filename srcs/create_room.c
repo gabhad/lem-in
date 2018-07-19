@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
+#include "lemin.h"
 
 void	create_room(t_fourm *fourm, char *line)
 {
@@ -30,9 +30,18 @@ void	create_room(t_fourm *fourm, char *line)
 	room->x = ft_atoi(table[1]);
 	room->y = ft_atoi(table[2]);
 	room->distance = -1;
+	ft_printf("tutu\n");
 	temp = fourm->start;
-	while (temp->next)
+	ft_printf("niania\n");
+	if (!fourm->room_list)
+		fourm->room_list = room;
+	else
+	{
 		temp = temp->next;
-	room = temp->next;
+		while (temp->next)
+			temp = temp->next;
+	}
+	temp->next = room;
 	room->next = NULL;
+	printf("potato\n");
 }

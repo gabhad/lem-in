@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
+#include "lemin.h"
 
 static void	clear_path(t_fourm *fourm)
 {
@@ -81,11 +81,14 @@ void		clear_fourm(t_fourm *fourm)
 	if (fourm->start)
 	{
 		temp = fourm->start;
-		while (temp->next)
+		if (temp->next)
 		{
-			temp_next = temp->next;
-			clear_room(temp);
-			temp = temp_next;
+			while (temp->next)
+			{
+				temp_next = temp->next;
+				clear_room(temp);
+				temp = temp_next;
+			}
 		}
 		clear_room(temp);
 	}

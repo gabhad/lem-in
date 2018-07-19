@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
+#include "lemin.h"
 
 void		clean_table(t_fourm *fourm, char **table, char *line)
 {
@@ -109,18 +109,22 @@ int			create_anthill(t_fourm *fourm, char *line)
 	ft_strdel(&line);
 	if (!(get_next_line(0, &line)))
 		error(fourm);
+//	write(1, "tutu\n", 5);
 	if (line[0] == '#')
 	{
 		gerer_diese(fourm, line);
 		return (1);
 	}
+//	write(1, "tutu\n", 5);
 	while (line[i])
 	{
-		if (line[i] == ' ')
+		if (line[i++] == ' ')
 			j++;
 	}
+//	write(1, "tutu\n", 5);
 	if (j == 2)
 	{
+		ft_printf("line = %s\n", line);
 		create_room(fourm, line);
 		return (1);
 	}

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
+#include "lemin.h"
 
 static int	correct_table(char *str)
 {
@@ -19,6 +19,8 @@ static int	correct_table(char *str)
 	i = 0;
 	while (str[i] == '0')
 		i++;
+	if (i > 0 && !str[i])
+		return (1);
 	if (str[i] != '+' && (str[i] < '0' || str[i] > '9'))
 		return (0);
 	while (str[i])

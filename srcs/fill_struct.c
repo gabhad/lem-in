@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
+#include "lemin.h"
 
 static void	get_ants(t_fourm *fourm, char *line)
 {
@@ -31,8 +31,10 @@ void		fill_struct(t_fourm *fourm)
 	line = NULL;
 	i = 0;
 	get_ants(fourm, line);
+//	printf("fourmis = %d\n", fourm->nb_fourmis);
 	while (create_anthill(fourm, line))
 		i++;
+	write(1, "tata\n", 5);
 	if (!fourm->start || !fourm->end)
 		error(fourm);
 	temp = fourm->start;
