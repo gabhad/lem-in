@@ -50,6 +50,7 @@ static void	initialize_end(t_fourm *fourm, char *line)
 	end->next = NULL;
 	end->distance = -1;
 	del_table(table);
+	ft_strdel(&line);
 }
 
 static void	initialize_start(t_fourm *fourm, char *line)
@@ -76,6 +77,7 @@ static void	initialize_start(t_fourm *fourm, char *line)
 	start->prev = NULL;
 	start->distance = 0;
 	del_table(table);
+	ft_strdel(&line);
 }
 
 static void	gerer_diese(t_fourm *fourm, char *line)
@@ -99,34 +101,30 @@ static void	gerer_diese(t_fourm *fourm, char *line)
 	}
 }
 
-int			create_anthill(t_fourm *fourm, char *line)
+char		*create_anthill(t_fourm *fourm, char *line)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	ft_strdel(&line);
 	if (!(get_next_line(0, &line)))
 		error(fourm);
-//	write(1, "tutu\n", 5);
 	if (line[0] == '#')
 	{
 		gerer_diese(fourm, line);
-		return (1);
+		return (NULL);
 	}
-//	write(1, "tutu\n", 5);
 	while (line[i])
 	{
 		if (line[i++] == ' ')
 			j++;
 	}
-//	write(1, "tutu\n", 5);
 	if (j == 2)
 	{
-		ft_printf("line = %s\n", line);
 		create_room(fourm, line);
-		return (1);
+		ft_strdel(&line);
+		return (NULL);
 	}
-	return (0);
+	return (line);
 }

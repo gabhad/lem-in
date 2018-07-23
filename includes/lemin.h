@@ -63,16 +63,16 @@ typedef struct	s_fourm
 
 void			error(t_fourm *fourm);
 void			error_table(t_fourm *fourm);
-void			getdata(t_fourm *fourm);
+t_fourm			*getdata(t_fourm *fourm);
 void			fill_struct(t_fourm *fourm);
-int				create_anthill(t_fourm *fourm, char *line);
+char			*create_anthill(t_fourm *fourm, char *line);
 void			create_room(t_fourm *fourm, char *line);
 void			clear_fourm(t_fourm *fourm);
 int				check_table(char **table);
 void			del_table(char **tab);
 void			get_tubes(t_fourm *fourm, char *line);
 void			generate_ants(t_fourm *fourm);
-void			lemin_solver(t_fourm *fourm);
+t_fourm			*lemin_solver(t_fourm *fourm);
 void			shortest_path(t_fourm *fourm);
 void			clean_table(t_fourm *fourm, char **table, char *line);
 void			set_path(t_fourm *fourm);

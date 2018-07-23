@@ -20,28 +20,41 @@ static void	get_ants(t_fourm *fourm, char *line)
 		ft_strdel(&line);
 		error(fourm);
 	}
+	ft_strdel(&line);
+}
+
+static void	finish_fourm(t_fourm *fourm)
+{
+	t_room	*temp;
+	int		i;
+
+	i = 0;
+	temp = NULL;
+	if (fourm->room_list)
+		fourm->start->next = fourm->room_list;
+	temp = fourm->start;
+	while (temp->next)
+	{
+		temp = temp->next;
+		i++;
+	}
+	temp->next = fourm->end;
+	fourm->nb_pieces = i + 2;
 }
 
 void		fill_struct(t_fourm *fourm)
 {
 	char	*line;
 	int		i;
-	t_room	*temp;
 
-	line = NULL;
 	i = 0;
+	line = NULL;
 	get_ants(fourm, line);
-//	printf("fourmis = %d\n", fourm->nb_fourmis);
-	while (create_anthill(fourm, line))
+	while (!(line = create_anthill(fourm, line)))
 		i++;
-	write(1, "tata\n", 5);
 	if (!fourm->start || !fourm->end)
 		error(fourm);
-	temp = fourm->start;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = fourm->end;
-	fourm->nb_pieces = i;
+	finish_fourm(fourm);
 	get_tubes(fourm, line);
 	generate_ants(fourm);
 }

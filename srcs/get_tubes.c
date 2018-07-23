@@ -20,13 +20,14 @@ static void		gerer_diese(t_fourm *fourm, char *line)
 		ft_strdel(&line);
 		error_table(fourm);
 	}
+	ft_strdel(&line);
 }
 
 static void		new_room(t_fourm *fourm, t_tube *tube, t_room *room, char *line)
 {
 	t_room	*temp;
 
-	temp = room;
+	temp = room->next;
 	while (!ft_strstr(line, temp->name))
 		temp = temp->next;
 	if (!temp)
@@ -47,11 +48,16 @@ static t_tube	*check_liaison(t_fourm *fourm, char *line)
 		if (ft_strstr(line, temp->name))
 		{
 			tube->room1 = temp;
-			temp = temp->next;
 			new_room(fourm, tube, temp, line);
+			return (tube);
 		}
+		else
+			temp = temp->next;
 	}
-	return (tube);
+	write(1, "Unknown tube\n", 13);
+	ft_strdel(&line);
+	error_table(fourm);
+	return (NULL);
 }
 
 void			get_tubes(t_fourm *fourm, char *line)
@@ -64,10 +70,7 @@ void			get_tubes(t_fourm *fourm, char *line)
 	while (get_next_line(0, &line))
 	{
 		if (line[0] == '#')
-		{
 			gerer_diese(fourm, line);
-			ft_strdel(&line);
-		}
 		else
 		{
 			temp->next_tube = check_liaison(fourm, line);

@@ -12,9 +12,16 @@
 
 #include "lemin.h"
 
-void	getdata(t_fourm *fourm)
+t_fourm	*getdata(t_fourm *fourm)
 {
 	if (!(fourm = (t_fourm*)malloc(sizeof(t_fourm))))
 		error(fourm);
+	fourm->start = NULL;
+	fourm->end = NULL;
+	fourm->room_list = NULL;
+	fourm->first_tube = NULL;
+	fourm->first_ant = NULL;
+	fourm->shortest_path = NULL;
 	fill_struct(fourm);
+	return (fourm);
 }

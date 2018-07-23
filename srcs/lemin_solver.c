@@ -12,9 +12,10 @@
 
 #include "lemin.h"
 
-void	lemin_solver(t_fourm *fourm)
+t_fourm	*lemin_solver(t_fourm *fourm)
 {
 	shortest_path(fourm);
 	set_path(fourm);
 	direct_ants(fourm);
+	return (fourm);
 }

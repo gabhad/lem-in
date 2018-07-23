@@ -12,6 +12,13 @@
 
 #include "lemin.h"
 
+static void	lemin(t_fourm *fourm)
+{
+	fourm = getdata(fourm);
+	fourm = lemin_solver(fourm);
+	clear_fourm(fourm);
+}
+
 int	main(int argc, char **argv)
 {
 	t_fourm	*fourm;
@@ -19,13 +26,6 @@ int	main(int argc, char **argv)
 	fourm = NULL;
 	(void)argv;
 	(void)argc;
-/*	if (argc == 1)
-	{
-		write(1, "ERROR\n", 6);
-		return (0);
-	}*/
-	getdata(fourm);
-	lemin_solver(fourm);
-	clear_fourm(fourm);
+	lemin(fourm);
 	return (0);
 }
