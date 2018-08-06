@@ -46,5 +46,6 @@ void		create_room(t_fourm *fourm, char *line)
 	room->x = ft_atoi(table[1]);
 	room->y = ft_atoi(table[2]);
 	room->distance = -1;
+	room->ant = 0;
 	add_room(fourm, room);
 }

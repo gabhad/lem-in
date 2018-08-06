@@ -57,4 +57,5 @@ void		fill_struct(t_fourm *fourm)
 	finish_fourm(fourm);
 	get_tubes(fourm, line);
 	generate_ants(fourm);
+	fourm->start->ant = fourm->nb_fourmis;
 }

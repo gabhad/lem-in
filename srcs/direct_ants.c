@@ -12,16 +12,20 @@
 
 #include "lemin.h"
 
-static int	next_ant(t_fourm *fourm, t_room *room)
+static int	next_ant(t_fourm *fourm, t_path *path)
 {
 	t_ant	*temp;
+	t_path	*previous;
 
+	previous = fourm->shortest_path;
+	while (previous->next != path)
+		previous = previous->next;
 	temp = fourm->first_ant;
-	while (ft_strcmp(temp->room->name, room->name))
+	while (ft_strcmp(temp->room->name, path->room->name))
 		temp = temp->next;
-	temp->room->ant = 0;
-	temp->room = room->next;
-	temp->room->ant = 1;
+	temp->room->ant--;
+	temp->room = previous->room;
+	temp->room->ant++;
 	return (temp->id);
 }
 
@@ -32,16 +36,16 @@ static void	move_ants(t_fourm *fourm)
 	int		antno;
 
 	temp = fourm->shortest_path->next;
-	while (!temp->room->ant)
+	while (temp->room->ant == 0)
 		temp = temp->next;
-	antno = next_ant(fourm, temp->room);
+	antno = next_ant(fourm, temp);
 	tempant = fourm->first_ant;
 	ft_printf("L%d-%s", tempant->id, tempant->room->name);
 	while (temp->next && temp->next->room->ant)
 	{
 		ft_printf(" ");
 		temp = temp->next;
-		antno = next_ant(fourm, temp->room);
+		antno = next_ant(fourm, temp);
 		tempant = fourm->first_ant;
 		ft_printf("L%d-%s", tempant->id, tempant->room->name);
 	}

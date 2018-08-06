@@ -69,7 +69,6 @@ void		shortest_path(t_fourm *fourm)
 		{
 			tube->room2->distance = 1;
 			find_path(fourm, tube->room2);
-
 		}
 		else if (fourm->start == tube->room2 && tube->room1->distance == -1)
 		{
