@@ -49,6 +49,7 @@ static t_tube	*check_liaison(t_fourm *fourm, char *line)
 		{
 			tube->room1 = temp;
 			new_room(fourm, tube, temp, line);
+			tube->next_tube = NULL;
 			return (tube);
 		}
 		else

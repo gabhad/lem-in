@@ -17,37 +17,41 @@ static void	find_path(t_fourm *fourm, t_room *room)
 	t_tube	*tube;
 
 	tube = fourm->first_tube;
-	while (tube->room1 != room && tube->room2 != room)
+	while (tube && tube->room1 != room && tube->room2 != room)
 		tube = tube->next_tube;
+	if (!tube)
+		error(fourm);
 	while (tube)
 	{
 		if (tube->room1 == room &&
-			(tube->room2->distance >= room->distance + 1 || 
+			(tube->room2->distance > room->distance + 1 ||
 				tube->room2->distance == -1))
 		{
 			if (tube->room2 == fourm->end)
 			{
 				fourm->end->distance = room->distance + 1;
-				return;
+				return ;
 			}
 			tube->room2->distance = room->distance + 1;
 			find_path(fourm, tube->room2);
 		}
 		else if (tube->room2 == room &&
-			(tube->room1->distance >= room->distance + 1 || 
+			(tube->room1->distance > room->distance + 1 ||
 				tube->room1->distance == -1))
 		{
 			if (tube->room1 == fourm->end)
 			{
 				fourm->end->distance = room->distance + 1;
-				return;
+				return ;
 			}
 			tube->room1->distance = room->distance + 1;
 			find_path(fourm, tube->room1);
 		}
-		tube = tube->next_tube;
+		if (tube->next_tube)
+			tube = tube->next_tube;
+		else
+			return ;
 	}
-
 }
 
 void		shortest_path(t_fourm *fourm)
@@ -61,12 +65,13 @@ void		shortest_path(t_fourm *fourm)
 		error(fourm);
 	while (tube)
 	{
-		if (fourm->start == tube->room1 && !tube->room2->distance)
+		if (fourm->start == tube->room1 && tube->room2->distance == -1)
 		{
 			tube->room2->distance = 1;
 			find_path(fourm, tube->room2);
+
 		}
-		else if (fourm->start == tube->room2 && !tube->room1->distance)
+		else if (fourm->start == tube->room2 && tube->room1->distance == -1)
 		{
 			tube->room1->distance = 1;
 			find_path(fourm, tube->room1);

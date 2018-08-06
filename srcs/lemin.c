@@ -19,7 +19,7 @@ static void	lemin(t_fourm *fourm)
 	clear_fourm(fourm);
 }
 
-int	main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_fourm	*fourm;
 
