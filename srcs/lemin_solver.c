@@ -16,6 +16,7 @@ t_fourm	*lemin_solver(t_fourm *fourm)
 {
 	shortest_path(fourm);
 	set_path(fourm);
+	ft_printf("%s\n", fourm->fourm);
 	direct_ants(fourm);
 	return (fourm);
 }

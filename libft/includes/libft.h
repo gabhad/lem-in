@@ -17,7 +17,7 @@
 # include <string.h>
 # include <unistd.h>
 
-#define BUFF_SIZE 2048
+# define BUFF_SIZE 2048
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *str, int c, size_t n);
@@ -72,7 +72,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_strjoinfree(char *s1, char *s2);
-int 				get_next_line(int fd, char **line);
+int					get_next_line(int fd, char **line);
 
 typedef struct		s_list
 {

@@ -20,7 +20,8 @@ static void		gerer_diese(t_fourm *fourm, char *line)
 		ft_strdel(&line);
 		error_table(fourm);
 	}
-	ft_strdel(&line);
+	line = ft_strjoinfree(line, ft_strdup("\n"));
+	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 }
 
 static void		new_room(t_fourm *fourm, t_tube *tube, t_room *room, char *line)
@@ -56,7 +57,8 @@ static t_tube	*check_liaison(t_fourm *fourm, char *line)
 			temp = temp->next;
 	}
 	write(1, "Unknown tube\n", 13);
-	ft_strdel(&line);
+	line = ft_strjoinfree(line, ft_strdup("\n"));
+	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 	error_table(fourm);
 	return (NULL);
 }
@@ -67,7 +69,8 @@ void			get_tubes(t_fourm *fourm, char *line)
 
 	fourm->first_tube = check_liaison(fourm, line);
 	temp = fourm->first_tube;
-	ft_strdel(&line);
+	line = ft_strjoinfree(line, ft_strdup("\n"));
+	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 	while (get_next_line(0, &line))
 	{
 		if (line[0] == '#')
@@ -76,7 +79,8 @@ void			get_tubes(t_fourm *fourm, char *line)
 		{
 			temp->next_tube = check_liaison(fourm, line);
 			temp = temp->next_tube;
-			ft_strdel(&line);
+			line = ft_strjoinfree(line, ft_strdup("\n"));
+			fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 		}
 	}
 }

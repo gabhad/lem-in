@@ -12,7 +12,13 @@
 
 #include "lemin.h"
 
-static void	find_path(t_fourm *fourm, t_room *room)
+static int	increase_distance(t_room *room1, t_room *room2)
+{
+	room1->distance = room2->distance + 1;
+	return (1);
+}
+
+static int	find_path(t_fourm *fourm, t_room *room)
 {
 	t_tube	*tube;
 
@@ -28,10 +34,7 @@ static void	find_path(t_fourm *fourm, t_room *room)
 				tube->room2->distance == -1))
 		{
 			if (tube->room2 == fourm->end)
-			{
-				fourm->end->distance = room->distance + 1;
-				return ;
-			}
+				return (increase_distance(fourm->end, room));
 			tube->room2->distance = room->distance + 1;
 			find_path(fourm, tube->room2);
 		}
@@ -40,18 +43,13 @@ static void	find_path(t_fourm *fourm, t_room *room)
 				tube->room1->distance == -1))
 		{
 			if (tube->room1 == fourm->end)
-			{
-				fourm->end->distance = room->distance + 1;
-				return ;
-			}
+				return (increase_distance(fourm->end, room));
 			tube->room1->distance = room->distance + 1;
 			find_path(fourm, tube->room1);
 		}
-		if (tube->next_tube)
-			tube = tube->next_tube;
-		else
-			return ;
+		tube = tube->next_tube;
 	}
+	return (0);
 }
 
 void		shortest_path(t_fourm *fourm)

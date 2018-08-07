@@ -22,6 +22,7 @@ t_fourm	*getdata(t_fourm *fourm)
 	fourm->first_tube = NULL;
 	fourm->first_ant = NULL;
 	fourm->shortest_path = NULL;
+	fourm->fourm = NULL;
 	fill_struct(fourm);
 	return (fourm);
 }

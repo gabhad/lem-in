@@ -23,7 +23,8 @@ void		clean_table(t_fourm *fourm, char **table, char *line)
 		i++;
 	}
 	free(table);
-	ft_strdel(&line);
+	line = ft_strjoinfree(line, ft_strdup("\n"));
+	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 	error(fourm);
 }
 
@@ -32,7 +33,8 @@ static void	initialize_end(t_fourm *fourm, char *line)
 	char	**table;
 	t_room	*end;
 
-	ft_strdel(&line);
+	line = ft_strjoinfree(line, ft_strdup("\n"));
+	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 	if (!(get_next_line(0, &line)))
 		error(fourm);
 	table = ft_strsplit(line, ' ');
@@ -51,7 +53,8 @@ static void	initialize_end(t_fourm *fourm, char *line)
 	end->distance = -1;
 	end->ant = 0;
 	del_table(table);
-	ft_strdel(&line);
+	line = ft_strjoinfree(line, ft_strdup("\n"));
+	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 }
 
 static void	initialize_start(t_fourm *fourm, char *line)
@@ -59,7 +62,8 @@ static void	initialize_start(t_fourm *fourm, char *line)
 	char	**table;
 	t_room	*start;
 
-	ft_strdel(&line);
+	line = ft_strjoinfree(line, ft_strdup("\n"));
+	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 	if (!(get_next_line(0, &line)))
 		error(fourm);
 	table = ft_strsplit(line, ' ');
@@ -78,14 +82,16 @@ static void	initialize_start(t_fourm *fourm, char *line)
 	start->prev = NULL;
 	start->distance = 0;
 	del_table(table);
-	ft_strdel(&line);
+	line = ft_strjoinfree(line, ft_strdup("\n"));
+	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 }
 
 static void	gerer_diese(t_fourm *fourm, char *line)
 {
 	if (line[1] != '#')
 	{
-		ft_strdel(&line);
+		line = ft_strjoinfree(line, ft_strdup("\n"));
+		fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 		return ;
 	}
 	else
@@ -96,7 +102,8 @@ static void	gerer_diese(t_fourm *fourm, char *line)
 			initialize_end(fourm, line);
 		else
 		{
-			ft_strdel(&line);
+			line = ft_strjoinfree(line, ft_strdup("\n"));
+			fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 			error(fourm);
 		}
 	}
@@ -124,7 +131,8 @@ char		*create_anthill(t_fourm *fourm, char *line)
 	if (j == 2)
 	{
 		create_room(fourm, line);
-		ft_strdel(&line);
+		line = ft_strjoinfree(line, ft_strdup("\n"));
+		fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 		return (NULL);
 	}
 	return (line);

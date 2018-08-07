@@ -45,7 +45,7 @@ OBJ = 			$(addprefix $(OBJ_PATH),$(OBJ_NAME))
 all: comp_libft $(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
-				$(CC) -o $@ $(OBJ) $(LIBFT_PATH)$(LIBFT_A)
+				$(CC) -g -fsanitize=address -o $@ $(OBJ) $(LIBFT_PATH)$(LIBFT_A)
 
 $(OBJ_PATH):
 				mkdir -p $(OBJ_PATH)

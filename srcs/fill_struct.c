@@ -20,7 +20,8 @@ static void	get_ants(t_fourm *fourm, char *line)
 		ft_strdel(&line);
 		error(fourm);
 	}
-	ft_strdel(&line);
+	line = ft_strjoinfree(line, ft_strdup("\n"));
+	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 }
 
 static void	finish_fourm(t_fourm *fourm)

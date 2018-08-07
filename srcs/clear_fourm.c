@@ -93,5 +93,6 @@ void		clear_fourm(t_fourm *fourm)
 	clear_tubes(fourm);
 	clear_ants(fourm);
 	clear_path(fourm);
+	ft_strdel(&fourm->fourm);
 	free(fourm);
 }

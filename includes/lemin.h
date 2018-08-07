@@ -50,6 +50,7 @@ typedef struct	s_path
 
 typedef struct	s_fourm
 {
+	char			*fourm;
 	t_room			*start;
 	t_room			*end;
 	t_room			*room_list;
