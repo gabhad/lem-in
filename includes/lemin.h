@@ -20,7 +20,6 @@
 typedef struct	s_room
 {
 	char			*name;
-	char			*links;
 	int				ant;
 	int				x;
 	int				y;

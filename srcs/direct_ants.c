@@ -36,10 +36,12 @@ static void	move_ants(t_fourm *fourm)
 	int		antno;
 
 	temp = fourm->shortest_path->next;
-	while (temp->room->ant == 0)
+	while (temp && temp->room->ant == 0)
 		temp = temp->next;
 	antno = next_ant(fourm, temp);
 	tempant = fourm->first_ant;
+	while (tempant->id != antno)
+		tempant = tempant->next;
 	ft_printf("L%d-%s", tempant->id, tempant->room->name);
 	while (temp->next && temp->next->room->ant)
 	{
@@ -47,13 +49,12 @@ static void	move_ants(t_fourm *fourm)
 		temp = temp->next;
 		antno = next_ant(fourm, temp);
 		tempant = fourm->first_ant;
+		while (tempant->id != antno)
+			tempant = tempant->next;
 		ft_printf("L%d-%s", tempant->id, tempant->room->name);
 	}
 	if (!temp->next || !temp->next->room->ant)
-	{
 		ft_printf("\n");
-		move_ants(fourm);
-	}
 }
 
 void		direct_ants(t_fourm *fourm)

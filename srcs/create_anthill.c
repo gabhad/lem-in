@@ -49,6 +49,7 @@ static void	initialize_end(t_fourm *fourm, char *line)
 	fourm->end = end;
 	end->next = NULL;
 	end->distance = -1;
+	end->ant = 0;
 	del_table(table);
 	ft_strdel(&line);
 }

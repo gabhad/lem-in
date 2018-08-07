@@ -28,13 +28,14 @@ void			generate_ants(t_fourm *fourm)
 	int		i;
 	t_ant	*temp;
 
-	i = 1;
-	fourm->first_ant = create_ant(fourm, i);
+	i = 2;
+	fourm->first_ant = create_ant(fourm, 1);
 	temp = fourm->first_ant;
-	i++;
-	while (i < (fourm->nb_fourmis - 1))
+	while (i < (fourm->nb_fourmis + 1))
 	{
 		temp->next = create_ant(fourm, i);
+		temp = temp->next;
 		i++;
 	}
+	temp->next = NULL;
 }

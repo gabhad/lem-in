@@ -48,4 +48,5 @@ void		create_room(t_fourm *fourm, char *line)
 	room->distance = -1;
 	room->ant = 0;
 	add_room(fourm, room);
+	del_table(table);
 }
