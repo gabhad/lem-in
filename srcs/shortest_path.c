@@ -12,13 +12,25 @@
 
 #include "lemin.h"
 
-static int	increase_distance(t_room *room1, t_room *room2)
+static int	valid_conditions(t_room *room1, t_room *room2, t_room *room)
+{
+	if (room1 == room &&
+			(room2->distance > room->distance + 1 ||
+				room2->distance == -1))
+		return (1);
+	else
+		return (0);
+}
+
+static int	increase_distance(t_fourm *fourm, t_room *room1, t_room *room2)
 {
 	room1->distance = room2->distance + 1;
+	if (room1 != fourm->end)
+		find_path(fourm, room1);
 	return (1);
 }
 
-static int	find_path(t_fourm *fourm, t_room *room)
+int			find_path(t_fourm *fourm, t_room *room)
 {
 	t_tube	*tube;
 
@@ -29,23 +41,17 @@ static int	find_path(t_fourm *fourm, t_room *room)
 		error(fourm);
 	while (tube)
 	{
-		if (tube->room1 == room &&
-			(tube->room2->distance > room->distance + 1 ||
-				tube->room2->distance == -1))
+		if (valid_conditions(tube->room1, tube->room2, room))
 		{
 			if (tube->room2 == fourm->end)
-				return (increase_distance(fourm->end, room));
-			tube->room2->distance = room->distance + 1;
-			find_path(fourm, tube->room2);
+				return (increase_distance(fourm, fourm->end, room));
+			increase_distance(fourm, tube->room2, room);
 		}
-		else if (tube->room2 == room &&
-			(tube->room1->distance > room->distance + 1 ||
-				tube->room1->distance == -1))
+		else if (valid_conditions(tube->room2, tube->room1, room))
 		{
 			if (tube->room1 == fourm->end)
-				return (increase_distance(fourm->end, room));
-			tube->room1->distance = room->distance + 1;
-			find_path(fourm, tube->room1);
+				return (increase_distance(fourm, fourm->end, room));
+			increase_distance(fourm, tube->room1, room);
 		}
 		tube = tube->next_tube;
 	}

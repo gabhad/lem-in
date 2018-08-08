@@ -74,6 +74,7 @@ void			get_tubes(t_fourm *fourm, char *line);
 void			generate_ants(t_fourm *fourm);
 t_fourm			*lemin_solver(t_fourm *fourm);
 void			shortest_path(t_fourm *fourm);
+int				find_path(t_fourm *fourm, t_room *room);
 void			clean_table(t_fourm *fourm, char **table, char *line);
 void			set_path(t_fourm *fourm);
 void			direct_ants(t_fourm *fourm);
