@@ -23,8 +23,7 @@ void		clean_table(t_fourm *fourm, char **table, char *line)
 		i++;
 	}
 	free(table);
-	line = ft_strjoinfree(line, ft_strdup("\n"));
-	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
+	ft_strdel(&line);
 	error(fourm);
 }
 
@@ -104,7 +103,7 @@ static void	gerer_diese(t_fourm *fourm, char *line)
 		{
 			line = ft_strjoinfree(line, ft_strdup("\n"));
 			fourm->fourm = ft_strjoinfree(fourm->fourm, line);
-			error(fourm);
+			return ;
 		}
 	}
 }

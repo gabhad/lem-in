@@ -75,21 +75,22 @@ void		clear_fourm(t_fourm *fourm)
 	t_room	*temp;
 	t_room	*temp_next;
 
+	temp = NULL;
 	temp_next = NULL;
 	if (fourm->start)
-	{
 		temp = fourm->start;
-		if (temp->next)
+	else if (fourm->room_list)
+		temp = fourm->room_list;
+	if (temp && temp->next)
+		while (temp->next)
 		{
-			while (temp->next)
-			{
-				temp_next = temp->next;
-				clear_room(temp);
-				temp = temp_next;
-			}
+			temp_next = temp->next;
+			clear_room(temp);
+			temp = temp_next;
 		}
-		clear_room(temp);
-	}
+	clear_room(temp);
+	if (fourm->end)
+		clear_room(fourm->end);
 	clear_tubes(fourm);
 	clear_ants(fourm);
 	clear_path(fourm);
