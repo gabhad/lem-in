@@ -128,7 +128,7 @@ char		*create_anthill(t_fourm *fourm, char *line)
 		if (line[i++] == ' ')
 			j++;
 	}
-	if (j == 2)
+	if (j >= 2)
 	{
 		create_room(fourm, line);
 		line = ft_strjoinfree(line, ft_strdup("\n"));

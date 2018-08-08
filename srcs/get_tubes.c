@@ -24,33 +24,39 @@ static void		gerer_diese(t_fourm *fourm, char *line)
 	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 }
 
-static void		new_room(t_fourm *fourm, t_tube *tube, t_room *room, char *line)
+static void		new_room(t_fourm *f, t_tube *tube, t_room *room, char **table)
 {
 	t_room	*temp;
 
-	temp = room->next;
-	while (!ft_strstr(line, temp->name))
+	tube->room1 = room;
+	temp = f->start;
+	while (ft_strcmp(table[1], temp->name) != 0)
 		temp = temp->next;
-	if (!temp)
-		error(fourm);
+	if (!temp || temp == room)
+	{
+		del_table(table);
+		error(f);
+	}
 	tube->room2 = temp;
+	tube->next_tube = NULL;
+	del_table(table);
 }
 
 static t_tube	*check_liaison(t_fourm *fourm, char *line)
 {
 	t_room	*temp;
 	t_tube	*tube;
+	char	**table;
 
 	if (!(tube = (t_tube*)malloc(sizeof(t_tube))))
 		error(fourm);
 	temp = fourm->start;
-	while (temp->next)
+	table = ft_strsplit(line, '-');
+	while (temp)
 	{
-		if (ft_strstr(line, temp->name))
+		if (!ft_strcmp(table[0], temp->name))
 		{
-			tube->room1 = temp;
-			new_room(fourm, tube, temp, line);
-			tube->next_tube = NULL;
+			new_room(fourm, tube, temp, table);
 			return (tube);
 		}
 		else
@@ -83,4 +89,5 @@ void			get_tubes(t_fourm *fourm, char *line)
 			fourm->fourm = ft_strjoinfree(fourm->fourm, line);
 		}
 	}
+	temp = fourm->first_tube;
 }
