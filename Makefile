@@ -32,6 +32,7 @@ SRC_NAME =		check_data.c \
 				generate_ants.c \
 				get_tubes.c \
 				getdata.c \
+				joinfree_space.c \
 				lemin.c \
 				lemin_solver.c \
 				set_path.c \

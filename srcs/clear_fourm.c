@@ -63,11 +63,17 @@ static void	clear_tubes(t_fourm *fourm)
 	free(temp);
 }
 
-static void	clear_room(t_room *room)
+static void	clear_room(t_fourm *fourm, t_room *room)
 {
-	if (room->name)
-		ft_strdel(&(room->name));
-	free(room);
+	if (room)
+	{
+		if (room->name)
+			ft_strdel(&(room->name));
+		if (room == fourm->end)
+			fourm->end = NULL;
+		room->next = NULL;
+		free(room);
+	}
 }
 
 void		clear_fourm(t_fourm *fourm)
@@ -78,19 +84,19 @@ void		clear_fourm(t_fourm *fourm)
 	temp = NULL;
 	temp_next = NULL;
 	if (fourm->start)
-		temp = fourm->start;
-	else if (fourm->room_list)
+		clear_room(fourm, fourm->start);
+	if (fourm->room_list)
 		temp = fourm->room_list;
 	if (temp && temp->next)
 		while (temp->next)
 		{
 			temp_next = temp->next;
-			clear_room(temp);
+			clear_room(fourm, temp);
 			temp = temp_next;
 		}
-	clear_room(temp);
+	clear_room(fourm, temp);
 	if (fourm->end)
-		clear_room(fourm->end);
+		clear_room(fourm, fourm->end);
 	clear_tubes(fourm);
 	clear_ants(fourm);
 	clear_path(fourm);

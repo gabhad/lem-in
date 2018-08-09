@@ -25,7 +25,6 @@ typedef struct	s_room
 	int				y;
 	int				distance;
 	struct s_room	*next;
-	struct s_room	*prev;
 }				t_room;
 
 typedef struct	s_ant
@@ -78,5 +77,6 @@ int				find_path(t_fourm *fourm, t_room *room);
 void			clean_table(t_fourm *fourm, char **table, char *line);
 void			set_path(t_fourm *fourm);
 void			direct_ants(t_fourm *fourm);
+char			*joinfree_space(char *s1, char *s2);
 
 #endif

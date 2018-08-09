@@ -52,8 +52,7 @@ static void	initialize_end(t_fourm *fourm, char *line)
 	end->distance = -1;
 	end->ant = 0;
 	del_table(table);
-	line = ft_strjoinfree(line, ft_strdup("\n"));
-	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
+	fourm->fourm = joinfree_space(fourm->fourm, line);
 }
 
 static void	initialize_start(t_fourm *fourm, char *line)
@@ -78,11 +77,9 @@ static void	initialize_start(t_fourm *fourm, char *line)
 	start->y = ft_atoi(table[2]);
 	fourm->start = start;
 	start->next = NULL;
-	start->prev = NULL;
 	start->distance = 0;
 	del_table(table);
-	line = ft_strjoinfree(line, ft_strdup("\n"));
-	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
+	fourm->fourm = joinfree_space(fourm->fourm, line);
 }
 
 static void	gerer_diese(t_fourm *fourm, char *line)
@@ -101,8 +98,7 @@ static void	gerer_diese(t_fourm *fourm, char *line)
 			initialize_end(fourm, line);
 		else
 		{
-			line = ft_strjoinfree(line, ft_strdup("\n"));
-			fourm->fourm = ft_strjoinfree(fourm->fourm, line);
+			fourm->fourm = joinfree_space(fourm->fourm, line);
 			return ;
 		}
 	}

@@ -17,7 +17,7 @@
 # include <string.h>
 # include <unistd.h>
 
-# define BUFF_SIZE 2048
+# define BUFF_SIZE 1
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *str, int c, size_t n);
