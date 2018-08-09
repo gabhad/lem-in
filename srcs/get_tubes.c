@@ -74,7 +74,7 @@ void			get_tubes(t_fourm *fourm, char *line)
 	fourm->first_tube = check_liaison(fourm, line);
 	temp = fourm->first_tube;
 	fourm->fourm = joinfree_space(fourm->fourm, line);
-	while (get_next_line(0, &line))
+	while (get_next_line(0, &line) > 0)
 	{
 		if (line[0] == '#')
 			gerer_diese(fourm, line);

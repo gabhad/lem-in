@@ -14,7 +14,7 @@
 
 static void	get_ants(t_fourm *fourm, char *line)
 {
-	if (!get_next_line(0, &line))
+	if (get_next_line(0, &line) < 1)
 		error(fourm);
 	if (!(fourm->nb_fourmis = ft_atoi(line)))
 	{

@@ -23,8 +23,8 @@ void		clean_table(t_fourm *fourm, char **table, char *line)
 		i++;
 	}
 	free(table);
+	(void)fourm;
 	ft_strdel(&line);
-	error(fourm);
 }
 
 static void	initialize_end(t_fourm *fourm, char *line)
@@ -34,9 +34,9 @@ static void	initialize_end(t_fourm *fourm, char *line)
 
 	line = ft_strjoinfree(line, ft_strdup("\n"));
 	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
-	if (!(get_next_line(0, &line)))
+	if (get_next_line(0, &line) < 1)
 		error(fourm);
-	table = ft_strsplit(line, ' ');
+	table = ft_strsplit_whitespaces(line);
 	if (!check_table(table))
 	{
 		clean_table(fourm, table, line);
@@ -60,11 +60,10 @@ static void	initialize_start(t_fourm *fourm, char *line)
 	char	**table;
 	t_room	*start;
 
-	line = ft_strjoinfree(line, ft_strdup("\n"));
-	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
-	if (!(get_next_line(0, &line)))
+	fourm->fourm = joinfree_space(fourm->fourm, line);
+	if (get_next_line(0, &line) < 1)
 		error(fourm);
-	table = ft_strsplit(line, ' ');
+	table = ft_strsplit_whitespaces(line);
 	if (!check_table(table))
 	{
 		clean_table(fourm, table, line);
@@ -86,8 +85,7 @@ static void	gerer_diese(t_fourm *fourm, char *line)
 {
 	if (line[1] != '#')
 	{
-		line = ft_strjoinfree(line, ft_strdup("\n"));
-		fourm->fourm = ft_strjoinfree(fourm->fourm, line);
+		fourm->fourm = joinfree_space(fourm->fourm, line);
 		return ;
 	}
 	else
@@ -111,7 +109,7 @@ char		*create_anthill(t_fourm *fourm, char *line)
 
 	i = 0;
 	j = 0;
-	if (!(get_next_line(0, &line)))
+	if (get_next_line(0, &line) < 1)
 		error(fourm);
 	if (line[0] == '#')
 	{
@@ -126,8 +124,7 @@ char		*create_anthill(t_fourm *fourm, char *line)
 	if (j >= 2)
 	{
 		create_room(fourm, line);
-		line = ft_strjoinfree(line, ft_strdup("\n"));
-		fourm->fourm = ft_strjoinfree(fourm->fourm, line);
+		fourm->fourm = joinfree_space(fourm->fourm, line);
 		return (NULL);
 	}
 	return (line);

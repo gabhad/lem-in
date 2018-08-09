@@ -86,6 +86,7 @@ SRC_NAME =		ft_printf.c \
 				ft_strjoin.c \
 				ft_strtrim.c \
 				ft_strsplit.c \
+				ft_strsplit_whitespaces.c \
 				ft_itoa.c \
 				ft_putchar.c \
 				ft_putstr.c \
