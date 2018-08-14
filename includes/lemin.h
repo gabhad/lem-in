@@ -78,5 +78,6 @@ void			clean_table(t_fourm *fourm, char **table, char *line);
 void			set_path(t_fourm *fourm);
 void			direct_ants(t_fourm *fourm);
 char			*joinfree_space(char *s1, char *s2);
+intmax_t		push_swap_atoi(const char *str);
 
 #endif

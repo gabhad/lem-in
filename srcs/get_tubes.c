@@ -6,7 +6,7 @@
 /*   By: ghaddad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 08:10:36 by ghaddad           #+#    #+#             */
-/*   Updated: 2018/06/28 08:10:37 by ghaddad          ###   ########.fr       */
+/*   Updated: 2018/08/14 14:11:20 by ghaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		new_room(t_fourm *f, t_tube *tube, t_room *room, char **table)
 
 	tube->room1 = room;
 	temp = f->start;
-	while (ft_strcmp(table[1], temp->name) != 0)
+	while (temp && ft_strcmp(table[1], temp->name) != 0)
 		temp = temp->next;
 	if (!temp || temp == room)
 	{

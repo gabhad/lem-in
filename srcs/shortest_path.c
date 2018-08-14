@@ -6,7 +6,7 @@
 /*   By: ghaddad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 11:32:28 by ghaddad           #+#    #+#             */
-/*   Updated: 2018/06/28 11:32:30 by ghaddad          ###   ########.fr       */
+/*   Updated: 2018/08/14 14:17:31 by ghaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,6 @@ void		shortest_path(t_fourm *fourm)
 		}
 		tube = tube->next_tube;
 	}
+	if (fourm->end->distance < 1)
+		error(fourm);
 }

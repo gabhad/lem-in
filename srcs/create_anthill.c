@@ -32,8 +32,7 @@ static void	initialize_end(t_fourm *fourm, char *line)
 	char	**table;
 	t_room	*end;
 
-	line = ft_strjoinfree(line, ft_strdup("\n"));
-	fourm->fourm = ft_strjoinfree(fourm->fourm, line);
+	fourm->fourm = joinfree_space(fourm->fourm, line);
 	if (get_next_line(0, &line) < 1)
 		error(fourm);
 	table = ft_strsplit_whitespaces(line);
