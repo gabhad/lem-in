@@ -17,6 +17,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# define MAX_ANT	100000
+
 typedef struct	s_room
 {
 	char			*name;

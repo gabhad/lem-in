@@ -12,47 +12,35 @@
 
 #include "lemin.h"
 
-static void	gerer_diese(t_fourm *fourm, char *line)
+static void	gerer_diese(t_fourm *fourm, char **line)
 {
-	if (line[1] != '#')
+	if (!ft_strcmp(*line, "##start"))
 	{
-		fourm->fourm = joinfree_space(fourm->fourm, line);
-		return ;
+		ft_strdel(line);
+		error(fourm);
+	}
+	else if (!ft_strcmp(*line, "##end"))
+	{
+		ft_strdel(line);
+		error(fourm);
 	}
 	else
-	{
-		if (!ft_strcmp(line, "##start"))
-		{
-			ft_strdel(&line);
-			error(fourm);
-		}
-		else if (!ft_strcmp(line, "##end"))
-		{
-			ft_strdel(&line);
-			error(fourm);
-		}
-		else
-		{
-			fourm->fourm = joinfree_space(fourm->fourm, line);
-			return ;
-		}
-	}
-	ft_strdel(&line);
+		fourm->fourm = joinfree_space(fourm->fourm, *line);
+	if (get_next_line(0, line) < 1)
+		error(fourm);
 }
 
 static void	get_ants(t_fourm *fourm, char *line)
 {
 	if (get_next_line(0, &line) < 1)
 		error(fourm);
-	if (push_swap_atoi(line) < 1 || push_swap_atoi(line) > 2147483647)
+	while (line[0] == '#')
+		gerer_diese(fourm, &line);
+	if (push_swap_atoi(line) < 1 || push_swap_atoi(line) > MAX_ANT)
 	{
 		ft_strdel(&line);
-		error(fourm);
-	}
-	while (line[0] == '#')
-	{
-		gerer_diese(fourm, line);
-		get_ants(fourm, line);
+		ft_printf("Nombre de fourmis invalide.\n");
+		error_table(fourm);
 	}
 	if ((fourm->nb_fourmis = ft_atoi(line)) < 1)
 	{

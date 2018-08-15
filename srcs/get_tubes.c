@@ -12,6 +12,13 @@
 
 #include "lemin.h"
 
+static void		incorrect_data(t_fourm *fourm, char *line)
+{
+	ft_printf("Merci de ne pas laisser de ligne vide.\n");
+	ft_strdel(&line);
+	error_table(fourm);
+}
+
 static void		gerer_diese(t_fourm *fourm, char *line)
 {
 	if (line[1] == '#')
@@ -47,6 +54,8 @@ static t_tube	*check_liaison(t_fourm *fourm, char *line)
 	t_tube	*tube;
 	char	**table;
 
+	if (!line[0])
+		incorrect_data(fourm, line);
 	if (!(tube = (t_tube*)malloc(sizeof(t_tube))))
 		error(fourm);
 	temp = fourm->start;
